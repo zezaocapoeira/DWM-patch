@@ -1466,7 +1466,7 @@ diff -rupN dwm-6.0-original/dwm.c dwm-6.0-patched/dwm.c
   * ignored (especially on UnmapNotify's).  Other types of errors call Xlibs
   * default error handler, which may call exit.  */
 diff -rupN dwm-6.0-original/maximize.c dwm-6.0-patched/maximize.c
---- dwm-6.0-original/maximize.c	1969-12-31 21:00:00.000000000 -0300
+--- dwm-6.0-original/maximize.c	2015-11-08 21:00:00.000000000 -0300
 +++ dwm-6.0-patched/maximize.c	2015-11-08 08:00:21.035313766 -0200
 @@ -0,0 +1,45 @@
 +void
