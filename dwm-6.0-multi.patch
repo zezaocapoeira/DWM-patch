@@ -101,7 +101,7 @@ diff -rupN dwm-6.0-original/config.def.h dwm-6.0-patched/config.def.h
 +
 +/**
 + * * config.h
-+ * MOD + F11 | F12
++ * MOD + Up | Down
 + */
 +static const char *upvol[]   = { "amixer", "set", "Master", "2%+",     NULL };
 +static const char *downvol[] = { "amixer", "set", "Master", "2%-",     NULL };
