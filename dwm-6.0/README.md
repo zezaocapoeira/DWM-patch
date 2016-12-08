@@ -1,6 +1,6 @@
 # dwm-6.0-multi.patch
 
-Sobre o DWM:
+Sobre o DWM e patches:
 
 - http://dwm.suckless.org/
 
@@ -37,3 +37,5 @@ static const char *dmenucmd[] = { "dmenu_run", "-i", "-l", "8", "-o", "0.9", "-f
 ![DWM-patch](https://raw.githubusercontent.com/zezaocapoeira/DWM-patch/master/dwm-6.0/screenshot/dwm-screen2.png)
 
 ![DWM-patch](https://raw.githubusercontent.com/zezaocapoeira/DWM-patch/master/dwm-6.0/screenshot/dwm-screen3.png)
+
+Obrigado pela atenção, salve!!!
