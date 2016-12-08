@@ -1,0 +1,50 @@
+#!/bin/sh
+
+userresources=$HOME/.Xresources
+usermodmap=$HOME/.Xmodmap
+sysresources=/etc/X11/xinit/.Xresources
+sysmodmap=/etc/X11/xinit/.Xmodmap
+
+# Merge in defaults and keymaps
+[ -f $sysresources ] && /usr/bin/xrdb -merge $sysresources
+[ -f $sysmodmap ] && /usr/bin/xmodmap $sysmodmap
+[ -f $userresources ] && /usr/bin/xrdb -merge $userresources
+[ -f $usermodmap ] && /usr/bin/xmodmap $usermodmap
+
+
+# start pulseaudio in the background
+if [ -x /usr/bin/start-pulseaudio-x11 ]; then
+    /usr/bin/start-pulseaudio-x11
+else
+    if [ -x /usr/bin/pulseaudio ]; then
+        /usr/bin/pulseaudio --start
+    fi
+fi
+
+xcompmgr -C &
+xset -dpms &
+xset s off &
+feh --bg-scale /home/zezao-slack/dotfiles-dwm/wall-default.jpg &
+volumeicon &
+parcellite &
+
+
+while true
+do
+    horas=$(date +"%A ➫ %d-%m-%Y ➫ %H:%M:%S")
+    TEMP=$(echo '➫ ')$(($(cat /sys/devices/platform/coretemp.0/hwmon/hwmon0/temp1_input) / 1000))°C
+    Mem=$(free -m | grep '^Mem' | awk '{print "Mem ➫ " $3"MB"}')
+    CPU=$(top -bn 4 | grep -F 'Cpu(s)' | tail -n 1 | awk '{print "CPU ➫ " $2"%"}' | sed 's/%us,//g')
+
+    xsetroot -name "| $CPU $TEMP | $Mem | $horas"
+
+    sleep 2s
+done &
+
+
+# Start dwm
+if [ -z "$DESKTOP_SESSION" -a -x /usr/bin/ck-launch-session ]; then
+  exec ck-launch-session dbus-launch --exit-with-session /usr/bin/dwm
+else
+  exec dwm
+fi
