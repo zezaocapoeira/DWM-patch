@@ -6,7 +6,7 @@ Sobre o DWM e patches:
 
 Download do DWM:
 
-- http://dl.suckless.org/dwm/dwm-6.1.tar.gz
+- https://github.com/zezaocapoeira/DWM-patch/raw/master/dwm-6.1/dwm-6.1.tar.gz
 
 
 
