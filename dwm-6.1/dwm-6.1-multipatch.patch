@@ -1,6 +1,6 @@
 diff -rupN dwm-6.1-original/config.h dwm-6.1-patched/config.h
---- dwm-6.1-original/config.h	2015-11-08 20:11:48.000000000 -0200
-+++ dwm-6.1-patched/config.h	2016-10-24 11:00:18.012258197 -0200
+--- dwm-6.1-original/config.h	2017-04-20 15:21:17.850030781 -0300
++++ dwm-6.1-patched/config.h	2018-03-12 07:41:12.376722231 -0300
 @@ -1,23 +1,55 @@
  /* See LICENSE file for copyright and license details. */
  
@@ -63,7 +63,7 @@ diff -rupN dwm-6.1-original/config.h dwm-6.1-patched/config.h
  
  static const Rule rules[] = {
  	/* xprop(1):
-@@ -25,9 +57,18 @@ static const Rule rules[] = {
+@@ -25,14 +57,24 @@ static const Rule rules[] = {
  	 *	WM_NAME(STRING) = title
  	 */
  	/* class      instance    title       tags mask     isfloating   monitor */
@@ -76,6 +76,7 @@ diff -rupN dwm-6.1-original/config.h dwm-6.1-patched/config.h
 +{   NULL,                               NULL,  "Default - Wine desktop",               0,         True,              True,                 -1 },
 +{ "Dolphin",                            NULL,                 NULL,                    0,         True,              True,                 -1 },
 +{ "Snes9x",                             NULL,                 NULL,                    0,         True,              True,                 -1 },
++{ "VirtualBox",                         NULL,                 NULL,                    0,         True,              True,                 -1 },
 +{ "Nvidia-settings",                    NULL,                 NULL,                    0,         True,              True,                 -1 },
 +{ "Evince",                             NULL,                 NULL,                    0,         True,              True,                 -1 },
 +{ "Simplescreenrecorder",               NULL,                 NULL,                    0,         True,              True,                 -1 },
@@ -85,7 +86,14 @@ diff -rupN dwm-6.1-original/config.h dwm-6.1-patched/config.h
  
  /* layout(s) */
  static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
-@@ -42,7 +83,7 @@ static const Layout layouts[] = {
+-static const int nmaster     = 1;    /* number of clients in master area */
+-static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
++static const int nmaster     = 0;    /* number of clients in master area */
++static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
+ 
+ static const Layout layouts[] = {
+ 	/* symbol     arrange function */
+@@ -42,7 +84,7 @@ static const Layout layouts[] = {
  };
  
  /* key definitions */
@@ -94,7 +102,7 @@ diff -rupN dwm-6.1-original/config.h dwm-6.1-patched/config.h
  #define TAGKEYS(KEY,TAG) \
  	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
  	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
-@@ -54,8 +95,13 @@ static const Layout layouts[] = {
+@@ -54,23 +96,36 @@ static const Layout layouts[] = {
  
  /* commands */
  static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
@@ -103,19 +111,33 @@ diff -rupN dwm-6.1-original/config.h dwm-6.1-patched/config.h
 +static const char *dmenucmd[] = { "dmenu_run", "-i", "-l", "8", "-fn", "Droid Sans Mono Bold-10",
 +                                 "-x", "10", "-y", "20", "-w", "300", "-nb", "#191919", "-nf", "#9ac0cd", "-sb",
 +                                 "#191919", "-sf", "#bf3f34", "-p", "MENU➫", NULL };
-+static const char *termcmd[]  = { "urxvt", "-T", "/bin/zsh", NULL };
++/*static const char *termcmd[]  = { "urxvt", "-T", "/bin/zsh", NULL };*/
++/*teste-tmux-auto-start*/
++static const char *termcmd[]  = { "urxvt", "-e", "tmux", NULL };
 +
 +#include "selfrestart.c"
 +#include "movestack.c"
  
  static Key keys[] = {
  	/* modifier                     key        function        argument */
-@@ -68,9 +114,11 @@ static Key keys[] = {
+ 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
+ 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
+ 	{ MODKEY,                       XK_b,      togglebar,      {0} },
+-	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
+-	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
+-	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
++	{ MODKEY,                       XK_j,      focusstack,     {.i = -1 } },
++	{ MODKEY,                       XK_k,      focusstack,     {.i = +1 } },
++	{ MODKEY,                       XK_Left,   focusstack,     {.i = -1 } },
++	{ MODKEY,                       XK_Right,  focusstack,     {.i = +1 } },
++    { MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
  	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
  	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
  	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
-+	{ MODKEY|ShiftMask,             XK_j,      movestack,      {.i = +1 } },
-+	{ MODKEY|ShiftMask,             XK_k,      movestack,      {.i = -1 } },
++	{ MODKEY|ShiftMask,             XK_j,      movestack,      {.i = -1 } },
++	{ MODKEY|ShiftMask,             XK_k,      movestack,      {.i = +1 } },
++	{ MODKEY|ShiftMask,             XK_Left,   movestack,      {.i = -1 } },
++	{ MODKEY|ShiftMask,             XK_Right,  movestack,      {.i = +1 } },
  	{ MODKEY,                       XK_Return, zoom,           {0} },
  	{ MODKEY,                       XK_Tab,    view,           {0} },
 -	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
@@ -123,7 +145,7 @@ diff -rupN dwm-6.1-original/config.h dwm-6.1-patched/config.h
  	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
  	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
  	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
-@@ -91,7 +139,8 @@ static Key keys[] = {
+@@ -91,7 +146,8 @@ static Key keys[] = {
  	TAGKEYS(                        XK_7,                      6)
  	TAGKEYS(                        XK_8,                      7)
  	TAGKEYS(                        XK_9,                      8)
@@ -133,7 +155,7 @@ diff -rupN dwm-6.1-original/config.h dwm-6.1-patched/config.h
  };
  
  /* button definitions */
-@@ -100,6 +149,7 @@ static Button buttons[] = {
+@@ -100,6 +156,7 @@ static Button buttons[] = {
  	/* click                event mask      button          function        argument */
  	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
  	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
@@ -141,21 +163,9 @@ diff -rupN dwm-6.1-original/config.h dwm-6.1-patched/config.h
  	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
  	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
  	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
-diff -rupN dwm-6.1-original/config.mk dwm-6.1-patched/config.mk
---- dwm-6.1-original/config.mk	2015-11-08 20:11:48.000000000 -0200
-+++ dwm-6.1-patched/config.mk	2016-10-23 02:51:40.228468383 -0200
-@@ -27,7 +27,7 @@ LIBS = -L${X11LIB} -lX11 ${XINERAMALIBS}
- # flags
- CPPFLAGS = -D_BSD_SOURCE -D_POSIX_C_SOURCE=2 -DVERSION=\"${VERSION}\" ${XINERAMAFLAGS}
- #CFLAGS   = -g -std=c99 -pedantic -Wall -O0 ${INCS} ${CPPFLAGS}
--CFLAGS   = -std=c99 -pedantic -Wall -Wno-deprecated-declarations -Os ${INCS} ${CPPFLAGS}
-+CFLAGS   = -std=c99 -pedantic -Wall -Wno-deprecated-declarations -Ofast ${INCS} ${CPPFLAGS}
- LDFLAGS  = -s ${LIBS}
- 
- # Solaris
 diff -rupN dwm-6.1-original/drw.c dwm-6.1-patched/drw.c
---- dwm-6.1-original/drw.c	2015-11-08 20:11:48.000000000 -0200
-+++ dwm-6.1-patched/drw.c	2016-10-23 02:51:40.229468383 -0200
+--- dwm-6.1-original/drw.c	2017-04-20 15:21:17.830030780 -0300
++++ dwm-6.1-patched/drw.c	2017-04-20 15:21:17.941030000 -0300
 @@ -206,6 +206,68 @@ drw_setscheme(Drw *drw, ClrScheme *schem
  	drw->scheme = scheme;
  }
@@ -226,8 +236,8 @@ diff -rupN dwm-6.1-original/drw.c dwm-6.1-patched/drw.c
  drw_rect(Drw *drw, int x, int y, unsigned int w, unsigned int h, int filled, int empty, int invert)
  {
 diff -rupN dwm-6.1-original/drw.h dwm-6.1-patched/drw.h
---- dwm-6.1-original/drw.h	2015-11-08 20:11:48.000000000 -0200
-+++ dwm-6.1-patched/drw.h	2016-10-23 02:51:40.229468383 -0200
+--- dwm-6.1-original/drw.h	2017-04-20 15:21:17.866030781 -0300
++++ dwm-6.1-patched/drw.h	2017-04-20 15:21:17.949030000 -0300
 @@ -67,6 +67,8 @@ void drw_setfont(Drw *, Fnt *);
  void drw_setscheme(Drw *, ClrScheme *);
  
@@ -238,8 +248,8 @@ diff -rupN dwm-6.1-original/drw.h dwm-6.1-patched/drw.h
  int drw_text(Drw *, int, int, unsigned int, unsigned int, const char *, int);
  
 diff -rupN dwm-6.1-original/dwm.c dwm-6.1-patched/dwm.c
---- dwm-6.1-original/dwm.c	2015-11-08 20:11:48.000000000 -0200
-+++ dwm-6.1-patched/dwm.c	2016-10-23 02:51:40.231468383 -0200
+--- dwm-6.1-original/dwm.c	2017-04-20 15:21:17.875030782 -0300
++++ dwm-6.1-patched/dwm.c	2017-04-20 15:21:17.959030000 -0300
 @@ -51,18 +51,37 @@
                                 * MAX(0, MIN((y)+(h),(m)->wy+(m)->wh) - MAX((y),(m)->wy)))
  #define ISVISIBLE(C)            ((C->tags & C->mon->tagset[C->mon->seltags]))
@@ -1583,7 +1593,7 @@ diff -rupN dwm-6.1-original/dwm.c dwm-6.1-patched/dwm.c
   * default error handler, which may call exit.  */
 diff -rupN dwm-6.1-original/movestack.c dwm-6.1-patched/movestack.c
 --- dwm-6.1-original/movestack.c	1969-12-31 21:00:00.000000000 -0300
-+++ dwm-6.1-patched/movestack.c	2016-10-23 07:34:36.846625383 -0200
++++ dwm-6.1-patched/movestack.c	2017-04-20 15:21:18.022030000 -0300
 @@ -0,0 +1,48 @@
 +void
 +movestack(const Arg *arg) {
@@ -1635,7 +1645,7 @@ diff -rupN dwm-6.1-original/movestack.c dwm-6.1-patched/movestack.c
 +}
 diff -rupN dwm-6.1-original/selfrestart.c dwm-6.1-patched/selfrestart.c
 --- dwm-6.1-original/selfrestart.c	1969-12-31 21:00:00.000000000 -0300
-+++ dwm-6.1-patched/selfrestart.c	2016-10-23 02:51:40.231468383 -0200
++++ dwm-6.1-patched/selfrestart.c	2017-04-20 15:21:17.972030000 -0300
 @@ -0,0 +1,65 @@
 +#include <unistd.h>
 +#include <sys/types.h>
