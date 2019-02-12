@@ -31,11 +31,17 @@ print_CPU(){
     echo -ne "${color_teste}| ${print_CPU}"
 }
 
+print_fan(){
+    fanspeed=$(echo '➫ ')$(sensors | grep fan1 | tail -n 1 | awk '{print $2 " rpm"}' | sed 's/%us,//g')
+     echo -ne "${color_teste}${fanspeed}"
+}
+
 while true
     do
 xsetroot -name \
 "$(print_CPU)\
 $(print_TEMP)\
+$(print_fan)\
 $(print_Mem)\
 $(print_horas)"
 
