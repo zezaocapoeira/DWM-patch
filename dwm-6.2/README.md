@@ -49,6 +49,9 @@ etc ...
 
 https://git.suckless.org/dwm/commit/cb3f58ad06993f7ef3a7d8f61468012e2b786cab.html
 
+- fonte dos patches
+
+https://dwm.suckless.org/patches/
 
 
 Obrigado pela atenção , salve !!!
