@@ -39,9 +39,9 @@ OBS:
 
 - Algumas configurações estão personalizadas, caso revise o arquivo config.h e faça as devidas adaptações. Por exemplo:
 
-ajustar as cores tipo de fonte.
+ajustar as cores, tipo de fonte.
 
-ajuste para o terminal que vai usar.
+Indicar qual terminal que vai usar.
 
 etc ...
 
