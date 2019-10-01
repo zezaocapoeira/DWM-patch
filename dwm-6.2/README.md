@@ -37,10 +37,12 @@ static const char *dmenucmd[] = { "dmenu_run", "-i", "-l", "8", "-fn", "Droid Sa
 
 OBS:
 
-- Algumas configurações estão personalizadas, caso revise o arquivo config.h e faça as devidas adaptações.Por exemplo:
+- Algumas configurações estão personalizadas, caso revise o arquivo config.h e faça as devidas adaptações. Por exemplo:
 
-ajustar as cores ;
-ajustar para o terminal que vai usar;
+ajustar as cores tipo de fonte.
+
+ajuste para o terminal que vai usar.
+
 etc ...
 
 - Nesse patch a alteração abaixo está desabilitada:
