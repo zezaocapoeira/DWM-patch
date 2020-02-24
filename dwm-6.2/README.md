@@ -1,4 +1,4 @@
-# dwm-6.2-multipatch.patch/dwm-6.2-multipatch-v2.patch
+# dwm-6.2-multipatch.patch/dwm-6.2-multipatch-v5.patch
 
 Sobre o DWM e patches:
 
@@ -10,14 +10,14 @@ Download do DWM:
 
 
 
-Descompacte o source "dwm-6.2.tar.gz" e entre no diretório "dwm-6.1" e aplique o patch :
+Descompacte o source "dwm-6.2.tar.gz" e entre no diretório "dwm-6.2" e aplique o patch :
 
 ````
 $ cd dwm-6.2
 
 $ cp config.def.h config.h
 
-$ patch -p1 < /local-onde-esta-o-patch/dwm-6.1-multipatch.patch
+$ patch -p1 < /local-onde-esta-o-patch/dwm-6.2-multipatch-v5.patch
 
 ````
 
